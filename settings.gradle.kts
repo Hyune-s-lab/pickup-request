@@ -1,6 +1,6 @@
 rootProject.name = "pickup-request"
 
 include(
-    "common:model",
+    "common",
     "domain:pickup"
 )

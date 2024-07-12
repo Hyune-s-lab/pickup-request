@@ -1,3 +1,3 @@
 dependencies {
-    implementation(project(":common:model"))
+    implementation(project(":common"))
 }
