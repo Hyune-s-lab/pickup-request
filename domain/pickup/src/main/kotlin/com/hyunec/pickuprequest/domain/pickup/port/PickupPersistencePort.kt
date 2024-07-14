@@ -1,6 +1,6 @@
 package com.hyunec.pickuprequest.domain.pickup.port
 
-import com.hyunec.pickuprequest.domain.pickup.Pickup
+import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 
 interface PickupPersistencePort {
     fun save(pickup: Pickup): String

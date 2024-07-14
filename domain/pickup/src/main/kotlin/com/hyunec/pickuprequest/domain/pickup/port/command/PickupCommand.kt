@@ -2,7 +2,7 @@ package com.hyunec.pickuprequest.domain.pickup.port.command
 
 import com.hyunec.pickuprequest.common.model.Actor
 import com.hyunec.pickuprequest.common.model.Store
-import com.hyunec.pickuprequest.domain.pickup.Pickup
+import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 
 sealed class PickupCommand {
     abstract val actor: Actor
@@ -31,6 +31,12 @@ sealed class PickupCommand {
     ) : PickupCommand()
 
     data class Approve(
+        override val actor: Actor,
+        override val desc: String,
+        override val pickupId: String,
+    ) : PickupCommand()
+
+    data class Complete(
         override val actor: Actor,
         override val desc: String,
         override val pickupId: String,
