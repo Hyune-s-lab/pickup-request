@@ -1,36 +1,31 @@
 package com.hyunec.pickuprequest.infrastructure.mysql.adapter
 
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
+import com.hyunec.pickuprequest.domain.pickup.exception.EntityNotFoundException
 import com.hyunec.pickuprequest.domain.pickup.port.PickupPersistencePort
-import com.hyunec.pickuprequest.infrastructure.mysql.entity.PickupHistoryJpaEntity
 import com.hyunec.pickuprequest.infrastructure.mysql.entity.PickupJpaEntity
-import com.hyunec.pickuprequest.infrastructure.mysql.entity.StoreJpaEntity
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 
+@Repository
 class PickupJpaPersistenceAdapter(
     private val pickupJpaRepository: PickupJpaRepository
 ) : PickupPersistencePort {
+    @Transactional
     override fun save(pickup: Pickup): String {
-        val pickupJpaEntity = PickupJpaEntity(
-            domainId = pickup.pickupId,
-            store = StoreJpaEntity(pickup.store),
-            histories = pickup.histories.map(::PickupHistoryJpaEntity).toMutableList()
-        )
-        val savedPickup = pickupJpaRepository.save(pickupJpaEntity)
-        return savedPickup.domainId
+        return pickupJpaRepository.save(PickupJpaEntity(pickup)).domainId
     }
 
+    @Transactional
     override fun update(pickup: Pickup): String {
-        TODO("Not yet implemented")
+        return pickupJpaRepository.findByDomainId(pickup.pickupId)?.let {
+            it.merge(pickup)
+            it.domainId
+        } ?: throw EntityNotFoundException("pickupId=${pickup.pickupId}")
     }
 
+    @Transactional(readOnly = true)
     override fun findByPickupId(pickupId: String): Pickup? {
-        val pickupJpaEntity = pickupJpaRepository.findByDomainId(pickupId)
-        return pickupJpaEntity?.let {
-            Pickup(
-                pickupId = it.domainId,
-                store = it.store.toDomainEntity(),
-                histories = it.histories.map(PickupHistoryJpaEntity::toDomainEntity).toMutableList()
-            )
-        }
+        return pickupJpaRepository.findByDomainId(pickupId)?.toDomainEntity()
     }
 }

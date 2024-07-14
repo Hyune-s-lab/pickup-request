@@ -1,0 +1,6 @@
+spring.config.activate.on-profile: test
+
+spring:
+    config:
+        import:
+            - infrastructure-mysql.yml
