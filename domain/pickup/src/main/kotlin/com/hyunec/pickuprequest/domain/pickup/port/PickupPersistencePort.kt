@@ -7,5 +7,5 @@ interface PickupPersistencePort {
 
     fun update(pickup: Pickup): String
 
-    fun findByPickupId(pickupId: String): Pickup?
+    fun findByDomainId(domainId: String): Pickup?
 }

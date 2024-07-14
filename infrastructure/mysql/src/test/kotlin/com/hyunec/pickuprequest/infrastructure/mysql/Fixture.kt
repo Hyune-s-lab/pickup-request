@@ -17,7 +17,7 @@ object Fixture {
 
     fun actor(actorType: Actor.Type): Actor {
         return Actor(
-            actorId = ULIDGenerator.take(),
+            id = ULIDGenerator.take(),
             type = actorType,
             name = faker.name().fullName()
         )
@@ -25,7 +25,7 @@ object Fixture {
 
     fun store(): Store {
         return Store(
-            storeId = ULIDGenerator.take(),
+            id = ULIDGenerator.take(),
             name = faker.name().fullName(),
             address = faker.address().fullAddress()
         )
@@ -33,10 +33,12 @@ object Fixture {
 
     fun label(): Pickup.Label {
         return Pickup.Label(
-            labelId = ULIDGenerator.take(),
+            id = ULIDGenerator.take(),
             qrcode = faker.barcode().ean13().toString(),
             volume = 16000,
-            imageUrls = listOf(faker.internet().image().toString())
+            images = listOf(
+                Pickup.Label.Image(faker.internet().image().toString())
+            )
         )
     }
 

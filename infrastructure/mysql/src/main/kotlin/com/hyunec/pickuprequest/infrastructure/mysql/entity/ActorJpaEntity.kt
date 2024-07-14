@@ -15,14 +15,14 @@ class ActorJpaEntity(
     val name: String
 ) : BaseEntity() {
     constructor(actor: Actor) : this(
-        domainId = actor.actorId,
+        domainId = actor.id,
         type = actor.type,
         name = actor.name
     )
 
     fun toDomainEntity(): Actor {
         return Actor(
-            actorId = domainId,
+            id = domainId,
             type = type,
             name = name
         )

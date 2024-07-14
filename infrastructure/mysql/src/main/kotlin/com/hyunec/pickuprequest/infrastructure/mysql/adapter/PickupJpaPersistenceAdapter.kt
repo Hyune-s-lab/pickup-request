@@ -18,14 +18,14 @@ class PickupJpaPersistenceAdapter(
 
     @Transactional
     override fun update(pickup: Pickup): String {
-        return pickupJpaRepository.findByDomainId(pickup.pickupId)?.let {
+        return pickupJpaRepository.findByDomainId(pickup.id)?.let {
             it.merge(pickup)
             it.domainId
-        } ?: throw EntityNotFoundException("pickupId=${pickup.pickupId}")
+        } ?: throw EntityNotFoundException("pickupId=${pickup.id}")
     }
 
     @Transactional(readOnly = true)
-    override fun findByPickupId(pickupId: String): Pickup? {
-        return pickupJpaRepository.findByDomainId(pickupId)?.toDomainEntity()
+    override fun findByDomainId(domainId: String): Pickup? {
+        return pickupJpaRepository.findByDomainId(domainId)?.toDomainEntity()
     }
 }

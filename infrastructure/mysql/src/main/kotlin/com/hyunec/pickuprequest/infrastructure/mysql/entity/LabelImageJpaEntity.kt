@@ -1,5 +1,6 @@
 package com.hyunec.pickuprequest.infrastructure.mysql.entity
 
+import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 
@@ -7,4 +8,12 @@ import jakarta.persistence.Table
 @Entity
 class LabelImageJpaEntity(
     val url: String,
-) : BaseEntity()
+) : BaseEntity() {
+    constructor(labelImage: Pickup.Label.Image) : this(
+        url = labelImage.url
+    )
+
+    fun toDomainEntity() = Pickup.Label.Image(
+        url = url
+    )
+}

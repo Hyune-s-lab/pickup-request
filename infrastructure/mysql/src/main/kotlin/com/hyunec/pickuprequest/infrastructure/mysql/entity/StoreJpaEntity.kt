@@ -12,14 +12,14 @@ class StoreJpaEntity(
     val address: String
 ) : BaseEntity() {
     constructor(store: Store) : this(
-        domainId = store.storeId,
+        domainId = store.id,
         name = store.name,
         address = store.address
     )
 
     fun toDomainEntity(): Store {
         return Store(
-            storeId = domainId,
+            id = domainId,
             name = name,
             address = address
         )

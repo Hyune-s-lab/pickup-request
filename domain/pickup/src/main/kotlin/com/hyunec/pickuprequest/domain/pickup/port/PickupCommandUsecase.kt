@@ -12,5 +12,7 @@ interface PickupCommandUsecase {
 
     fun approve(command: PickupCommand.Approve): String
 
+    fun complete(command: PickupCommand.Complete): String
+
     fun cancel(command: PickupCommand.Cancel): String
 }

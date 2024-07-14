@@ -1,7 +1,7 @@
 package com.hyunec.pickuprequest.common.model
 
 data class Store(
-    val storeId: String,
+    val id: String,
     val name: String,
     val address: String
 )

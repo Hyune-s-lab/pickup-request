@@ -15,16 +15,16 @@ class LabelJpaEntity(
     val images: List<LabelImageJpaEntity>,
 ) : BaseEntity() {
     constructor(label: Pickup.Label) : this(
-        label.labelId,
+        label.id,
         label.qrcode,
         label.volume,
-        label.imageUrls.map(::LabelImageJpaEntity)
+        label.images.map(::LabelImageJpaEntity)
     )
 
     fun toDomainEntity() = Pickup.Label(
-        labelId = domainId,
+        id = domainId,
         qrcode = qrcode,
         volume = volume,
-        imageUrls = images.map { it.url }
+        images = images.map(LabelImageJpaEntity::toDomainEntity)
     )
 }

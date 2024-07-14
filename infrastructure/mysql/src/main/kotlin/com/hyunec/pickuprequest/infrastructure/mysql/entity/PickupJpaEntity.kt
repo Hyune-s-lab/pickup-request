@@ -22,14 +22,14 @@ class PickupJpaEntity(
     val histories: MutableList<PickupHistoryJpaEntity> = mutableListOf()
 ) : BaseEntity() {
     constructor(pickup: Pickup) : this(
-        domainId = pickup.pickupId,
+        domainId = pickup.id,
         status = pickup.status,
         store = StoreJpaEntity(pickup.store),
         histories = pickup.histories.map(::PickupHistoryJpaEntity).toMutableList()
     )
 
     fun toDomainEntity() = Pickup(
-        pickupId = domainId,
+        id = domainId,
         store = store.toDomainEntity(),
         label = label?.toDomainEntity(),
         histories = histories.map(PickupHistoryJpaEntity::toDomainEntity).toMutableList()

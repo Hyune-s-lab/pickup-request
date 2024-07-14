@@ -1,7 +1,7 @@
 package com.hyunec.pickuprequest.common.model
 
 data class Actor(
-    val actorId: String,
+    val id: String,
     val type: Type,
     val name: String
 ) {

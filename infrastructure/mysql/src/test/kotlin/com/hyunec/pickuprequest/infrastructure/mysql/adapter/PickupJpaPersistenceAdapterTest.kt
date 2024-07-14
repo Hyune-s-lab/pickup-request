@@ -29,8 +29,8 @@ class PickupJpaPersistenceAdapterTest(
 
         sut.save(pickupRequested)
 
-        with(pickupJpaRepository.findByDomainId(pickupRequested.pickupId)!!) {
-            domainId shouldBe pickupRequested.pickupId
+        with(pickupJpaRepository.findByDomainId(pickupRequested.id)!!) {
+            domainId shouldBe pickupRequested.id
             status shouldBe Pickup.Status.REQUESTED
             store shouldNotBe null
             label shouldBe null
@@ -51,8 +51,8 @@ class PickupJpaPersistenceAdapterTest(
 
         sut.update(pickupAccepted)
 
-        with(pickupJpaRepository.findByDomainId(pickupRequested.pickupId)!!) {
-            domainId shouldBe pickupRequested.pickupId
+        with(pickupJpaRepository.findByDomainId(pickupRequested.id)!!) {
+            domainId shouldBe pickupRequested.id
             status shouldBe Pickup.Status.ACCEPTED
             store shouldNotBe null
             label shouldBe null
@@ -68,11 +68,11 @@ class PickupJpaPersistenceAdapterTest(
             sut.update(pickup)
         }
 
-        exception.message shouldContain pickup.pickupId
+        exception.message shouldContain pickup.id
     }
 
     @RepeatedTest(10)
     fun `존재하지 않는 pickupId 로 조회하면 null 을 반환한다`() {
-        sut.findByPickupId("not-exist-pickupId") shouldBe null
+        sut.findByDomainId("not-exist-pickupId") shouldBe null
     }
 }

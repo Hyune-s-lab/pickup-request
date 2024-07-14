@@ -7,7 +7,7 @@ import com.hyunec.pickuprequest.domain.pickup.port.command.PickupCommand
 import java.time.Instant
 
 data class Pickup(
-    val pickupId: String,
+    val id: String,
     val store: Store,
 
     var label: Label? = null,
@@ -18,7 +18,7 @@ data class Pickup(
         get() = histories.last().status
 
     constructor(command: PickupCommand.Request) : this(
-        pickupId = command.pickupId,
+        id = command.pickupId,
         store = command.store,
 
         histories = mutableListOf(
@@ -127,9 +127,13 @@ data class Pickup(
     )
 
     data class Label(
-        val labelId: String,
+        val id: String,
         val qrcode: String,
         val volume: Int,
-        val imageUrls: List<String>,
-    )
+        val images: List<Image>,
+    ) {
+        data class Image(
+            val url: String
+        )
+    }
 }
