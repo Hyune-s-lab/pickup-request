@@ -6,25 +6,19 @@ import jakarta.persistence.*
 @Table(name = "label")
 @Entity
 class LabelJpaEntity(
+    @Column(unique = true)
     val domainId: String,
     val qrcode: String,
     val volume: Int,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "label_id")
-    val images: List<LabelImageJpaEntity>,
+    @ElementCollection
+    @CollectionTable(name = "label_image", joinColumns = [JoinColumn(name = "label_id")])
+    val images: List<LabelImageJpaEmbeddable>,
 ) : BaseEntity() {
-    constructor(label: Pickup.Label) : this(
-        label.id,
-        label.qrcode,
-        label.volume,
-        label.images.map(::LabelImageJpaEntity)
-    )
-
     fun toDomainEntity() = Pickup.Label(
         id = domainId,
         qrcode = qrcode,
         volume = volume,
-        images = images.map(LabelImageJpaEntity::toDomainEntity)
+        images = images.map(LabelImageJpaEmbeddable::toDomainEntity)
     )
 }

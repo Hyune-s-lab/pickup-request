@@ -5,7 +5,6 @@ import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 import com.hyunec.pickuprequest.domain.pickup.exception.EntityNotFoundException
 import com.hyunec.pickuprequest.domain.pickup.port.command.PickupCommand
 import com.hyunec.pickuprequest.infrastructure.mysql.Fixture
-import com.hyunec.pickuprequest.infrastructure.mysql.Fixture.actor
 import com.hyunec.pickuprequest.infrastructure.mysql.Fixture.pickupCommand
 import com.hyunec.pickuprequest.infrastructure.mysql.Fixture.pickupId
 import com.hyunec.pickuprequest.infrastructure.mysql.TestDefaultSupport
@@ -43,9 +42,12 @@ class PickupJpaPersistenceAdapterTest(
         val pickupRequested = Fixture.pickupRequested()
         sut.save(pickupRequested)
 
+        val pickupDriverActor = pickupRequested.histories.last().actor
+        val partnerStoreOwnerActor = Fixture.actor(Actor.Type.PARTNER_STORE_OWNER)
+
         val pickupAccepted = pickupCommand<PickupCommand.Accept>(
             pickupId = pickupId(),
-            actor = actor(Actor.Type.PARTNER_STORE_OWNER),
+            actor = partnerStoreOwnerActor,
             desc = Fixture.faker.lorem().sentence()
         ).let { pickupRequested.accept(it) }
 
@@ -57,6 +59,55 @@ class PickupJpaPersistenceAdapterTest(
             store shouldNotBe null
             label shouldBe null
             histories.size shouldBe 2
+        }
+
+        val pickupProcessed = pickupCommand<PickupCommand.Process>(
+            pickupId = pickupId(),
+            actor = pickupDriverActor,
+            desc = Fixture.faker.lorem().sentence(),
+            label = Fixture.label()
+        ).let { pickupAccepted.process(it) }
+
+        sut.update(pickupProcessed)
+
+        with(pickupJpaRepository.findByDomainId(pickupRequested.id)!!) {
+            domainId shouldBe pickupRequested.id
+            status shouldBe Pickup.Status.PROCESSED
+            store shouldNotBe null
+            label shouldNotBe null
+            histories.size shouldBe 3
+        }
+
+        val pickupApproved = pickupCommand<PickupCommand.Approve>(
+            pickupId = pickupId(),
+            actor = partnerStoreOwnerActor,
+            desc = Fixture.faker.lorem().sentence()
+        ).let { pickupProcessed.approve(it) }
+
+        sut.update(pickupApproved)
+
+        with(pickupJpaRepository.findByDomainId(pickupRequested.id)!!) {
+            domainId shouldBe pickupRequested.id
+            status shouldBe Pickup.Status.APPROVED
+            store shouldNotBe null
+            label shouldNotBe null
+            histories.size shouldBe 4
+        }
+
+        val pickupComplete = pickupCommand<PickupCommand.Complete>(
+            pickupId = pickupId(),
+            actor = Fixture.actor(Actor.Type.SYSTEM_AUTO),
+            desc = Fixture.faker.lorem().sentence()
+        ).let { pickupApproved.complete(it) }
+
+        sut.update(pickupComplete)
+
+        with(pickupJpaRepository.findByDomainId(pickupRequested.id)!!) {
+            domainId shouldBe pickupRequested.id
+            status shouldBe Pickup.Status.COMPLETED
+            store shouldNotBe null
+            label shouldNotBe null
+            histories.size shouldBe 5
         }
     }
 

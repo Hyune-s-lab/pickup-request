@@ -9,17 +9,25 @@ import org.springframework.transaction.annotation.Transactional
 
 @Repository
 class PickupJpaPersistenceAdapter(
-    private val pickupJpaRepository: PickupJpaRepository
+    private val pickupJpaRepository: PickupJpaRepository,
+
+    private val pickupMapper: PickupMapper
 ) : PickupPersistencePort {
     @Transactional
     override fun save(pickup: Pickup): String {
-        return pickupJpaRepository.save(PickupJpaEntity(pickup)).domainId
+        val pickupJpaEntity = PickupJpaEntity(
+            domainId = pickup.id,
+            status = pickup.status,
+            store = pickupMapper.toJpaEntity(pickup.store),
+            histories = pickup.histories.map { pickupMapper.toJpaEntity(it) }.toMutableList()
+        )
+        return pickupJpaRepository.save(pickupJpaEntity).domainId
     }
 
     @Transactional
     override fun update(pickup: Pickup): String {
         return pickupJpaRepository.findByDomainId(pickup.id)?.let {
-            it.merge(pickup)
+            pickupMapper.merge(it, pickup)
             it.domainId
         } ?: throw EntityNotFoundException("pickupId=${pickup.id}")
     }

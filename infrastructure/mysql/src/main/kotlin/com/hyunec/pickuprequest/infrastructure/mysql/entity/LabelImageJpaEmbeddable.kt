@@ -1,14 +1,12 @@
 package com.hyunec.pickuprequest.infrastructure.mysql.entity
 
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import jakarta.persistence.Embeddable
 
-@Table(name = "label_image")
-@Entity
-class LabelImageJpaEntity(
+@Embeddable
+class LabelImageJpaEmbeddable(
     val url: String,
-) : BaseEntity() {
+) {
     constructor(labelImage: Pickup.Label.Image) : this(
         url = labelImage.url
     )
