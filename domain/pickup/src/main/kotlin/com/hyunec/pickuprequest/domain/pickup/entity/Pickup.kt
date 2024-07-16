@@ -17,8 +17,8 @@ data class Pickup(
     val status: Status
         get() = histories.last().status
 
-    constructor(command: PickupCommand.Request) : this(
-        id = command.pickupId,
+    constructor(pickupId: String, command: PickupCommand.Request) : this(
+        id = pickupId,
         store = command.store,
 
         histories = mutableListOf(
@@ -122,7 +122,7 @@ data class Pickup(
     data class History(
         val actor: Actor,
         val status: Status,
-        val desc: String,
+        val desc: String?,
         val at: Instant
     )
 

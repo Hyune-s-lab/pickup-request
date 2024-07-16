@@ -22,8 +22,7 @@ class PickupController(
             PickupCommand.Request(
                 actor = Actor(request.actor.id, request.actor.type, "noname"),
                 store = Store(request.store.id, request.store.name, request.store.address),
-                desc = request.desc ?: "",
-                pickupId = "1234"
+                desc = request.desc,
             )
         )
 

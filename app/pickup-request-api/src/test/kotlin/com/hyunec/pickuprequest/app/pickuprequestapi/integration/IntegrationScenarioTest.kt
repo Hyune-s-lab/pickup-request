@@ -24,20 +24,20 @@ class IntegrationScenarioTest(
     @Nested
     inner class `가맹사 점주의 수거 요청 scenario` {
         private val dummy = Fixture.Dummy()
+        private lateinit var pickupId: String
         private lateinit var target: Pickup
 
         @Test
         fun `1) 가맹사 점주 - 점포를 지정하여 REQUESTED`() {
             val requestCommand = Fixture.pickupCommand<PickupCommand.Request>(
-                pickupId = dummy.pickupId,
                 store = dummy.store,
                 actor = dummy.actors[Actor.Type.PARTNER_STORE_OWNER]!!,
                 desc = faker.lorem().sentence()
             )
 
-            pickupCommandUsecase.request(requestCommand)
-            target = pickupPersistencePort.findByDomainId(dummy.pickupId)!!
-
+            pickupId = pickupCommandUsecase.request(requestCommand)
+            
+            target = pickupPersistencePort.findByDomainId(pickupId)!!
             with(target) {
                 status shouldBe Pickup.Status.REQUESTED
                 store shouldBe store
@@ -49,13 +49,13 @@ class IntegrationScenarioTest(
         @Test
         fun `2)수거 기사 - ACCEPTED`() {
             val acceptCommand = Fixture.pickupCommand<PickupCommand.Accept>(
-                pickupId = dummy.pickupId,
+                pickupId = pickupId,
                 actor = dummy.actors[Actor.Type.PICKUP_DRIVER]!!,
                 desc = faker.lorem().sentence()
             )
 
             pickupCommandUsecase.accept(acceptCommand)
-            target = pickupPersistencePort.findByDomainId(dummy.pickupId)!!
+            target = pickupPersistencePort.findByDomainId(pickupId)!!
 
             with(target) {
                 status shouldBe Pickup.Status.ACCEPTED
@@ -67,14 +67,14 @@ class IntegrationScenarioTest(
         @Test
         fun `3) 수거 기사 - 라벨을 기록하여 PROCESSED`() {
             val processCommand = Fixture.pickupCommand<PickupCommand.Process>(
-                pickupId = dummy.pickupId,
+                pickupId = pickupId,
                 label = dummy.label,
                 actor = dummy.actors[Actor.Type.PICKUP_DRIVER]!!,
                 desc = faker.lorem().sentence()
             )
 
             pickupCommandUsecase.process(processCommand)
-            target = pickupPersistencePort.findByDomainId(dummy.pickupId)!!
+            target = pickupPersistencePort.findByDomainId(pickupId)!!
 
             with(target) {
                 status shouldBe Pickup.Status.PROCESSED
@@ -87,13 +87,13 @@ class IntegrationScenarioTest(
         @Test
         fun `4) 가맹사 점주 - APPROVED`() {
             val approveCommand = Fixture.pickupCommand<PickupCommand.Approve>(
-                pickupId = dummy.pickupId,
+                pickupId = pickupId,
                 actor = dummy.actors[Actor.Type.PARTNER_STORE_OWNER]!!,
                 desc = faker.lorem().sentence()
             )
 
             pickupCommandUsecase.approve(approveCommand)
-            target = pickupPersistencePort.findByDomainId(dummy.pickupId)!!
+            target = pickupPersistencePort.findByDomainId(pickupId)!!
 
             with(target) {
                 status shouldBe Pickup.Status.APPROVED
@@ -105,12 +105,12 @@ class IntegrationScenarioTest(
         @Test
         fun `5) 자동 시스템 - COMPLETED`() {
             val completeCommand = Fixture.pickupCommand<PickupCommand.Complete>(
-                pickupId = dummy.pickupId,
+                pickupId = pickupId,
                 actor = dummy.actors[Actor.Type.SYSTEM_AUTO]!!
             )
 
             pickupCommandUsecase.complete(completeCommand)
-            target = pickupPersistencePort.findByDomainId(dummy.pickupId)!!
+            target = pickupPersistencePort.findByDomainId(pickupId)!!
 
             with(target) {
                 status shouldBe Pickup.Status.COMPLETED
@@ -121,7 +121,7 @@ class IntegrationScenarioTest(
 
         @Test
         fun `6) pickupQueryUsecase 로 조회해서 확인`() {
-            pickupQueryUsecase.findByDomainId(dummy.pickupId) shouldBe target
+            pickupQueryUsecase.findByDomainId(pickupId) shouldBe target
         }
     }
 }

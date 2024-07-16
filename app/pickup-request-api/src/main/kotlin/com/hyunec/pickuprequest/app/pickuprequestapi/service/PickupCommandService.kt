@@ -1,5 +1,6 @@
 package com.hyunec.pickuprequest.app.pickuprequestapi.service
 
+import com.hyunec.pickuprequest.common.util.id.ULIDGenerator
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 import com.hyunec.pickuprequest.domain.pickup.exception.EntityNotFoundException
 import com.hyunec.pickuprequest.domain.pickup.port.PickupCommandUsecase
@@ -14,7 +15,7 @@ class PickupCommandService(
     private val pickupPersistencePort: PickupPersistencePort
 ) : PickupCommandUsecase {
     override fun request(command: PickupCommand.Request): String {
-        return pickupPersistencePort.save(Pickup(command))
+        return pickupPersistencePort.save(Pickup(ULIDGenerator.take(), command))
     }
 
     override fun accept(command: PickupCommand.Accept): String {

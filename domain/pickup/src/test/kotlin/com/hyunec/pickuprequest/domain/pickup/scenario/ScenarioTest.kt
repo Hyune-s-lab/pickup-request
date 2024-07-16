@@ -25,13 +25,12 @@ class ScenarioTest : TestDefaultSupport() {
 
         // 1. 가맹사 점주: 점포를 지정하여 REQUESTED
         val requestCommand = Fixture.pickupCommand<PickupCommand.Request>(
-            pickupId = pickupId,
             store = store,
             actor = partnerStoreOwnerActor,
             desc = faker.lorem().sentence()
         )
 
-        pickup = Pickup(requestCommand)
+        pickup = Pickup(pickupId, requestCommand)
 
         with(pickup) {
             status shouldBe Pickup.Status.REQUESTED
@@ -116,13 +115,12 @@ class ScenarioTest : TestDefaultSupport() {
 
         // 1. 가맹사 어드민: 점포를 지정하여 REQUESTED
         val requestCommand = Fixture.pickupCommand<PickupCommand.Request>(
-            pickupId = pickupId,
             store = store,
             actor = partnerAdminActor,
             desc = faker.lorem().sentence()
         )
 
-        pickup = Pickup(requestCommand)
+        pickup = Pickup(pickupId, requestCommand)
 
         with(pickup) {
             status shouldBe Pickup.Status.REQUESTED

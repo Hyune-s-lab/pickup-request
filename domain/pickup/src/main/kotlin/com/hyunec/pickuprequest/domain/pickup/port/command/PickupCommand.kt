@@ -6,45 +6,48 @@ import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 
 sealed class PickupCommand {
     abstract val actor: Actor
-    abstract val desc: String
-    abstract val pickupId: String
+    abstract val desc: String?
 
     data class Request(
         override val actor: Actor,
-        override val desc: String,
-        override val pickupId: String,
+        override val desc: String?,
 
         val store: Store,
     ) : PickupCommand()
 
     data class Accept(
         override val actor: Actor,
-        override val desc: String,
-        override val pickupId: String
+        override val desc: String?,
+
+        val pickupId: String
     ) : PickupCommand()
 
     data class Process(
         override val actor: Actor,
-        override val desc: String,
-        override val pickupId: String,
+        override val desc: String?,
+
+        val pickupId: String,
         val label: Pickup.Label
     ) : PickupCommand()
 
     data class Approve(
         override val actor: Actor,
-        override val desc: String,
-        override val pickupId: String,
+        override val desc: String?,
+
+        val pickupId: String,
     ) : PickupCommand()
 
     data class Complete(
         override val actor: Actor,
-        override val desc: String,
-        override val pickupId: String,
+        override val desc: String?,
+
+        val pickupId: String,
     ) : PickupCommand()
 
     data class Cancel(
         override val actor: Actor,
-        override val desc: String,
-        override val pickupId: String,
+        override val desc: String?,
+
+        val pickupId: String,
     ) : PickupCommand()
 }

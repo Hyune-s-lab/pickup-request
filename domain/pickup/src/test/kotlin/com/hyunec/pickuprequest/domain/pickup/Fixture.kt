@@ -43,7 +43,7 @@ object Fixture {
     }
 
     inline fun <reified T : PickupCommand> pickupCommand(
-        pickupId: String,
+        pickupId: String? = null,
         store: Store? = null,
 
         label: Pickup.Label? = null,
@@ -52,12 +52,12 @@ object Fixture {
         desc: String = ""
     ): T {
         return when (T::class) {
-            PickupCommand.Request::class -> PickupCommand.Request(actor, desc, pickupId, store!!) as T
-            PickupCommand.Accept::class -> PickupCommand.Accept(actor, desc, pickupId) as T
-            PickupCommand.Process::class -> PickupCommand.Process(actor, desc, pickupId, label!!) as T
-            PickupCommand.Approve::class -> PickupCommand.Approve(actor, desc, pickupId) as T
-            PickupCommand.Complete::class -> PickupCommand.Complete(actor, desc, pickupId) as T
-            PickupCommand.Cancel::class -> PickupCommand.Cancel(actor, desc, pickupId) as T
+            PickupCommand.Request::class -> PickupCommand.Request(actor, desc, store!!) as T
+            PickupCommand.Accept::class -> PickupCommand.Accept(actor, desc, pickupId!!) as T
+            PickupCommand.Process::class -> PickupCommand.Process(actor, desc, pickupId!!, label!!) as T
+            PickupCommand.Approve::class -> PickupCommand.Approve(actor, desc, pickupId!!) as T
+            PickupCommand.Complete::class -> PickupCommand.Complete(actor, desc, pickupId!!) as T
+            PickupCommand.Cancel::class -> PickupCommand.Cancel(actor, desc, pickupId!!) as T
             else -> throw IllegalArgumentException("Unsupported type")
         }
     }

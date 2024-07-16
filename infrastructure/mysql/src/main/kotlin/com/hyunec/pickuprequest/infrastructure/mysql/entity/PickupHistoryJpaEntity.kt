@@ -11,7 +11,7 @@ class PickupHistoryJpaEntity(
     val actor: ActorJpaEntity,
     @Enumerated(EnumType.STRING)
     val status: Pickup.Status,
-    val description: String,
+    val description: String?,
     val at: Instant
 ) : BaseEntity() {
     fun toDomainEntity(): Pickup.History {
