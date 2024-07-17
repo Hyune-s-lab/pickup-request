@@ -22,6 +22,6 @@ class ActorController(
     )
 
     data class Response(
-        val pickupId: String
+        val actorId: String
     )
 }
