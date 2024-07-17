@@ -10,21 +10,21 @@ sealed class PickupCommand {
 
     data class Request(
         override val actor: Actor,
-        override val desc: String?,
+        override val desc: String? = null,
 
         val store: Store,
     ) : PickupCommand()
 
     data class Accept(
         override val actor: Actor,
-        override val desc: String?,
+        override val desc: String? = null,
 
         val pickupId: String
     ) : PickupCommand()
 
     data class Process(
         override val actor: Actor,
-        override val desc: String?,
+        override val desc: String? = null,
 
         val pickupId: String,
         val label: Pickup.Label
@@ -32,21 +32,21 @@ sealed class PickupCommand {
 
     data class Approve(
         override val actor: Actor,
-        override val desc: String?,
+        override val desc: String? = null,
 
         val pickupId: String,
     ) : PickupCommand()
 
     data class Complete(
         override val actor: Actor,
-        override val desc: String?,
+        override val desc: String? = null,
 
         val pickupId: String,
     ) : PickupCommand()
 
     data class Cancel(
         override val actor: Actor,
-        override val desc: String?,
+        override val desc: String? = null,
 
         val pickupId: String,
     ) : PickupCommand()

@@ -8,4 +8,5 @@ interface ActorPersistencePort {
 
     fun findAll(): List<Actor>
     fun findByDomainId(domainId: String): Actor?
+    fun findByType(type: Actor.Type): List<Actor>
 }

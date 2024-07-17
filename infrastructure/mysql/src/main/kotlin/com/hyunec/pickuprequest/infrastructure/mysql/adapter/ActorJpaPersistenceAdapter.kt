@@ -28,4 +28,8 @@ class ActorJpaPersistenceAdapter(
     override fun findByDomainId(domainId: String): Actor? {
         return actorJpaRepository.findByDomainId(domainId)?.toDomainEntity()
     }
+
+    override fun findByType(type: Actor.Type): List<Actor> {
+        return actorJpaRepository.findByType(type).map { it.toDomainEntity() }
+    }
 }
