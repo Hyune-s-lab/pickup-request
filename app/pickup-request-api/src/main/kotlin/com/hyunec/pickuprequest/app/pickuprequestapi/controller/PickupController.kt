@@ -1,7 +1,5 @@
 package com.hyunec.pickuprequest.app.pickuprequestapi.controller
 
-import com.hyunec.pickuprequest.app.pickuprequestapi.controller.model.ActorModel
-import com.hyunec.pickuprequest.app.pickuprequestapi.controller.model.StoreModel
 import com.hyunec.pickuprequest.app.pickuprequestapi.service.PickupCommandService
 import com.hyunec.pickuprequest.app.pickuprequestapi.service.PickupQueryService
 import com.hyunec.pickuprequest.common.model.Actor
@@ -18,10 +16,11 @@ class PickupController(
 ) {
     @PostMapping("/pickups")
     fun request(@RequestBody request: Request): Response {
+
         val pickupId = pickupCommandService.request(
             PickupCommand.Request(
-                actor = Actor(request.actor.id, request.actor.type, "noname"),
-                store = Store(request.store.id, request.store.name, request.store.address),
+                actor = getActor(request.actorId),
+                store = getStore(request.storeId),
                 desc = request.desc,
             )
         )
@@ -29,9 +28,19 @@ class PickupController(
         return Response(pickupId)
     }
 
+    // todo
+    private fun getActor(actorId: String): Actor {
+        return Actor(actorId, Actor.Type.PARTNER_STORE_OWNER, "actorName")
+    }
+
+    // todo
+    private fun getStore(storeId: String): Store {
+        return Store(storeId, "storeName", "storeAddress")
+    }
+
     data class Request(
-        val actor: ActorModel,
-        val store: StoreModel,
+        val actorId: String,
+        val storeId: String,
         val desc: String?
     )
 

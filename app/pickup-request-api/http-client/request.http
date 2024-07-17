@@ -3,14 +3,7 @@ POST {{host}}/pickups
 Content-Type: application/json
 
 {
-  "actor": {
-    "id": "actor123",
-    "type": "PICKUP_DRIVER"
-  },
-  "store": {
-    "id": "store456",
-    "name": "Sample Store",
-    "address": "123 Main St"
-  },
+  "actorId": "actor123",
+  "storeId": "store456",
   "desc": "Please pick up the items."
 }
