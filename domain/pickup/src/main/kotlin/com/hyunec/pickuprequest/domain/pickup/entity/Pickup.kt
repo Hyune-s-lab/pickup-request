@@ -1,7 +1,5 @@
 package com.hyunec.pickuprequest.domain.pickup.entity
 
-import com.hyunec.pickuprequest.common.model.Actor
-import com.hyunec.pickuprequest.common.model.Store
 import com.hyunec.pickuprequest.common.util.PreconditionsSupporter.require
 import com.hyunec.pickuprequest.domain.pickup.port.command.PickupCommand
 import java.time.Instant

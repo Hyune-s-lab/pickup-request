@@ -1,8 +1,8 @@
 package com.hyunec.pickuprequest.infrastructure.mysql.adapter
 
-import com.hyunec.pickuprequest.common.model.Actor
-import com.hyunec.pickuprequest.common.model.Store
+import com.hyunec.pickuprequest.domain.pickup.entity.Actor
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
+import com.hyunec.pickuprequest.domain.pickup.entity.Store
 import com.hyunec.pickuprequest.infrastructure.mysql.entity.*
 import org.springframework.stereotype.Component
 

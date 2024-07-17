@@ -1,6 +1,6 @@
 package com.hyunec.pickuprequest.infrastructure.mysql.entity
 
-import com.hyunec.pickuprequest.common.model.Store
+import com.hyunec.pickuprequest.domain.pickup.entity.Store
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table

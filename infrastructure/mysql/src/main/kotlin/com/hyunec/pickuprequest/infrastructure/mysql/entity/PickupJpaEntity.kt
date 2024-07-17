@@ -11,13 +11,13 @@ class PickupJpaEntity(
     @Enumerated(EnumType.STRING)
     var status: Pickup.Status,
 
-    @ManyToOne(cascade = [CascadeType.ALL])
+    @ManyToOne
     val store: StoreJpaEntity,
 
-    @OneToOne(cascade = [CascadeType.ALL])
+    @OneToOne(cascade = [CascadeType.PERSIST])
     var label: LabelJpaEntity? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(cascade = [CascadeType.PERSIST], orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "pickup_id")
     val histories: MutableList<PickupHistoryJpaEntity> = mutableListOf()
 ) : BaseEntity() {

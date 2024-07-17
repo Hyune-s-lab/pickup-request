@@ -1,9 +1,9 @@
 package com.hyunec.pickuprequest.infrastructure.mysql
 
-import com.hyunec.pickuprequest.common.model.Actor
-import com.hyunec.pickuprequest.common.model.Store
 import com.hyunec.pickuprequest.common.util.id.ULIDGenerator
+import com.hyunec.pickuprequest.domain.pickup.entity.Actor
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
+import com.hyunec.pickuprequest.domain.pickup.entity.Store
 import com.hyunec.pickuprequest.domain.pickup.port.command.PickupCommand
 import net.datafaker.Faker
 
@@ -62,11 +62,13 @@ object Fixture {
         }
     }
 
-    fun pickupRequested(): Pickup {
-        return pickupCommand<PickupCommand.Request>(
-            store = store(),
-            actor = actor(Actor.Type.PARTNER_STORE_OWNER),
-            desc = faker.lorem().sentence()
-        ).let { Pickup(pickupId(), it) }
-    }
+    data class Sample(
+        val actors: Map<Actor.Type, Actor> = mapOf(
+            Actor.Type.PICKUP_DRIVER to actor(Actor.Type.PICKUP_DRIVER),
+            Actor.Type.PARTNER_STORE_OWNER to actor(Actor.Type.PARTNER_STORE_OWNER),
+            Actor.Type.SYSTEM_AUTO to actor(Actor.Type.SYSTEM_AUTO)
+        ),
+        val store: Store = store(),
+        val label: Pickup.Label = label()
+    )
 }

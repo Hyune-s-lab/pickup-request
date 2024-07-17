@@ -7,7 +7,7 @@ import java.time.Instant
 @Table(name = "pickup_history")
 @Entity
 class PickupHistoryJpaEntity(
-    @ManyToOne(cascade = [CascadeType.ALL])
+    @ManyToOne
     val actor: ActorJpaEntity,
     @Enumerated(EnumType.STRING)
     val status: Pickup.Status,

@@ -1,9 +1,46 @@
 ###
+POST http://localhost:8080/actors
+Content-Type: application/json
+
+{
+  "type": "PARTNER_STORE_OWNER",
+  "name": "John Doe"
+}
+
+###
+POST http://localhost:8080/actors
+Content-Type: application/json
+
+{
+  "type": "PICKUP_DRIVER",
+  "name": "Mary Jane"
+}
+
+###
+POST http://localhost:8080/actors
+Content-Type: application/json
+
+{
+  "type": "SYSTEM_AUTO",
+  "name": "SYSTEM_AUTO"
+}
+
+###
+POST http://localhost:8080/stores
+Content-Type: application/json
+
+{
+  "name": "Store 1",
+  "address": "123 Main"
+}
+
+###
 POST {{host}}/pickups
 Content-Type: application/json
 
 {
-  "actorId": "actor123",
-  "storeId": "store456",
+  "actorId": "01J30Q527F82EJW0TAWWME7EHD",
+  "storeId": "01J30Q52J3F8C2TWK99KQB59WW",
   "desc": "Please pick up the items."
 }
+

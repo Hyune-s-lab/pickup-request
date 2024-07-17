@@ -1,8 +1,8 @@
 package com.hyunec.pickuprequest.domain.pickup.scenario
 
-import com.hyunec.pickuprequest.common.model.Actor
 import com.hyunec.pickuprequest.domain.pickup.Fixture
 import com.hyunec.pickuprequest.domain.pickup.TestDefaultSupport
+import com.hyunec.pickuprequest.domain.pickup.entity.Actor
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 import com.hyunec.pickuprequest.domain.pickup.port.command.PickupCommand
 import io.kotest.matchers.shouldBe

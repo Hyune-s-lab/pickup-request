@@ -1,4 +1,4 @@
-package com.hyunec.pickuprequest.common.model
+package com.hyunec.pickuprequest.domain.pickup.entity
 
 data class Actor(
     val id: String,

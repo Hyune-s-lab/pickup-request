@@ -1,6 +1,6 @@
 package com.hyunec.pickuprequest.infrastructure.mysql.entity
 
-import com.hyunec.pickuprequest.common.model.Actor
+import com.hyunec.pickuprequest.domain.pickup.entity.Actor
 import jakarta.persistence.*
 
 @Table(name = "actor")
