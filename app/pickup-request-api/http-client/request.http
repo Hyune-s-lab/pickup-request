@@ -1,0 +1,69 @@
+###
+POST http://localhost:8080/actors
+Content-Type: application/json
+
+{
+  "type": "PARTNER_STORE_OWNER",
+  "name": "John Doe"
+}
+
+###
+POST http://localhost:8080/actors
+Content-Type: application/json
+
+{
+  "type": "PICKUP_DRIVER",
+  "name": "Mary Jane2"
+}
+
+###
+POST http://localhost:8080/actors
+Content-Type: application/json
+
+{
+  "type": "SYSTEM_AUTO",
+  "name": "SYSTEM_AUTO"
+}
+
+###
+POST http://localhost:8080/stores
+Content-Type: application/json
+
+{
+  "name": "Store 1",
+  "address": "123 Main"
+}
+
+###
+POST {{host}}/pickups
+Content-Type: application/json
+
+{
+  "actorId": "01J30RNMGJKWBFQT95892JRZJB",
+  "storeId": "01J30RPR8KFB1S8ZTNAEM0KVN3",
+  "desc": "Please pick up the items."
+}
+
+###
+PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/accept
+Content-Type: application/json
+
+{
+  "actorId": "01J30RSWWJXF32X986K6T1YTNW"
+}
+
+###
+PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/process
+Content-Type: application/json
+
+{
+  "actorId": "01J30RSWWJXF32X986K6T1YTNW"
+}
+
+###
+PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/approve
+Content-Type: application/json
+
+{
+  "actorId": "01J30RNMGJKWBFQT95892JRZJB"
+}
