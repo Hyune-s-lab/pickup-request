@@ -8,11 +8,17 @@
 
 ## required feature
 
-### 구현에서 생략하는 것
+### architecture
+
+![image](https://github.com/user-attachments/assets/5b1bec5a-273b-44e4-a0d1-c60513476db3)
+
+![image](https://github.com/user-attachments/assets/4109867a-f096-4e75-a990-d724ef0ce7a0)
+
+### 구현에서 생략된 것
 
 - 본 서버는 private vpc 에 존재하며, 인증은 gateway 에서 처리된 것으로 간주합니다.
-- 라벨 정보에는 QR 코드, 수거된 용량, 이미지 등이 있지만, 별도의 서버에서 처리되는 것을 간주하여 고유 코드만 기록 합니다.
-- 점포 정보에는 주소 등이 있지만, 별도의 서버에서 처리되는 것을 간주하여 점포 코드만 기록 합니다.
+- 라벨 정보에는 QR 코드, 수거된 용량, 이미지 등이 있지만, 이번 구현에서는 제외 됩니다.
+- 점포 정보에는 주소 등이 있지만, admin 을 통해 사전에 등록된 것으로 간주 합니다.
 
 ### 시나리오에 관련된 actor 는 4 종류가 있으며, 시스템에 관련된 actor 는 2 종류가 있습니다.
 
