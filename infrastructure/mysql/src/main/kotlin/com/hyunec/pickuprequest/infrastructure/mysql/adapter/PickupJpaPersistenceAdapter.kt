@@ -6,10 +6,12 @@ import com.hyunec.pickuprequest.domain.pickup.port.PickupPersistencePort
 import com.hyunec.pickuprequest.infrastructure.mysql.entity.PickupJpaEntity
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
+import java.time.Instant
 
 @Repository
 class PickupJpaPersistenceAdapter(
     private val pickupJpaRepository: PickupJpaRepository,
+    private val pickupHistoryQuerydslRepository: PickupQuerydslRepository,
 
     private val pickupMapper: PickupMapper
 ) : PickupPersistencePort {
@@ -35,5 +37,10 @@ class PickupJpaPersistenceAdapter(
     @Transactional(readOnly = true)
     override fun findByDomainId(domainId: String): Pickup? {
         return pickupJpaRepository.findByDomainId(domainId)?.toDomainEntity()
+    }
+
+    @Transactional(readOnly = true)
+    override fun findAllBy(storeId: String?, startAt: Instant?, endAt: Instant?): List<Pickup> {
+        return pickupHistoryQuerydslRepository.findAllBy(storeId, startAt, endAt).map { it.toDomainEntity() }
     }
 }

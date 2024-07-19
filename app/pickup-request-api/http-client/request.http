@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{host}}/pickups/01J35YZSM4H6CZRPT647EWAXHV/accept
+PATCH {{host}}/pickups/01J368N1XFJSF8D2C9439GTPHM/accept
 Content-Type: application/json
 
 {
@@ -59,7 +59,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{host}}/pickups/01J35YZSM4H6CZRPT647EWAXHV/process
+PATCH {{host}}/pickups/01J368E2AT3BGSHJC4QA0C8J5X/process
 Content-Type: application/json
 
 {
@@ -67,7 +67,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{host}}/pickups/01J35YZSM4H6CZRPT647EWAXHV/approve
+PATCH {{host}}/pickups/01J368E2AT3BGSHJC4QA0C8J5X/approve
 Content-Type: application/json
 
 {
@@ -75,4 +75,10 @@ Content-Type: application/json
 }
 
 ### pickup 조회
-GET {{host}}/pickups?pickupId=01J35YZSM4H6CZRPT647EWAXHV
+GET {{host}}/pickups?pickupId=01J368E2AT3BGSHJC4QA0C8J5X
+
+### pickup 조건 조회
+GET http://localhost:8080/pickups?
+    storeId=01J35TXCVCZ27VZHWZQ7VSD452
+    &startedAt=2024-07-19T19:45:19.218114Z
+    &endedAt=2024-07-19T19:50:20.218114Z
