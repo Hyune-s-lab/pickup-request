@@ -15,6 +15,10 @@ class ActorService(
         return actorPersistencePort.save(Actor(ULIDGenerator.take(), type, name))
     }
 
+    override fun findAll(): List<Actor> {
+        return actorPersistencePort.findAll()
+    }
+
     override fun findByActorId(actorId: String): Actor {
         return actorPersistencePort.findByDomainId(actorId)
             ?: throw EntityNotFoundException("actorId=$actorId")

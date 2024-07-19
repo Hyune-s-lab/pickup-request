@@ -25,6 +25,9 @@ Content-Type: application/json
   "name": "SYSTEM_AUTO"
 }
 
+### actor 전체 조회
+GET http://localhost:8080/actors
+
 ###
 POST http://localhost:8080/stores
 Content-Type: application/json
@@ -33,6 +36,9 @@ Content-Type: application/json
   "name": "Store 1",
   "address": "123 Main"
 }
+
+### store 전체 조회
+GET http://localhost:8080/stores
 
 ###
 POST {{host}}/pickups

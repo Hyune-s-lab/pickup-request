@@ -6,5 +6,6 @@ interface StoreUsecase {
 
     fun create(name: String, address: String): String
 
+    fun findAll(): List<Store>
     fun findByStoreId(storeId: String): Store
 }
