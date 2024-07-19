@@ -19,7 +19,7 @@ class PickupHistoryJpaEntity(
             actor = actor.toDomainEntity(),
             status = status,
             desc = description,
-            at = at
+            createdAt = at
         )
     }
 }

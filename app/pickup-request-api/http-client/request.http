@@ -39,31 +39,31 @@ POST {{host}}/pickups
 Content-Type: application/json
 
 {
-  "actorId": "01J30RNMGJKWBFQT95892JRZJB",
-  "storeId": "01J30RPR8KFB1S8ZTNAEM0KVN3",
+  "actorId": "01J35TVJKT2NT3WJFSTQ3C7AX6",
+  "storeId": "01J35TXCVCZ27VZHWZQ7VSD452",
   "desc": "Please pick up the items."
 }
 
 ###
-PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/accept
+PATCH {{host}}/pickups/01J35VDBNMZF4BCWNH7ZBZ5ENW/accept
 Content-Type: application/json
 
 {
-  "actorId": "01J30RSWWJXF32X986K6T1YTNW"
+  "actorId": "01J35TW0D7V812DS2Y8QRCXJA9"
 }
 
 ###
-PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/process
+PATCH {{host}}/pickups/01J35VDBNMZF4BCWNH7ZBZ5ENW/process
 Content-Type: application/json
 
 {
-  "actorId": "01J30RSWWJXF32X986K6T1YTNW"
+  "actorId": "01J35TW0D7V812DS2Y8QRCXJA9"
 }
 
 ###
-PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/approve
+PATCH {{host}}/pickups/01J35VDBNMZF4BCWNH7ZBZ5ENW/approve
 Content-Type: application/json
 
 {
-  "actorId": "01J30RNMGJKWBFQT95892JRZJB"
+  "actorId": "01J35TVJKT2NT3WJFSTQ3C7AX6"
 }

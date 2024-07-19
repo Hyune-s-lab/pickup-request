@@ -6,6 +6,7 @@ import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 import com.hyunec.pickuprequest.domain.pickup.entity.Store
 import com.hyunec.pickuprequest.domain.pickup.port.command.PickupCommand
 import net.datafaker.Faker
+import java.time.Instant
 
 object Fixture {
     @PublishedApi
@@ -19,7 +20,8 @@ object Fixture {
         return Actor(
             id = ULIDGenerator.take(),
             type = actorType,
-            name = faker.name().fullName()
+            name = faker.name().fullName(),
+            createdAt = Instant.now()
         )
     }
 
@@ -27,7 +29,8 @@ object Fixture {
         return Store(
             id = ULIDGenerator.take(),
             name = faker.name().fullName(),
-            address = faker.address().fullAddress()
+            address = faker.address().fullAddress(),
+            createdAt = Instant.now()
         )
     }
 

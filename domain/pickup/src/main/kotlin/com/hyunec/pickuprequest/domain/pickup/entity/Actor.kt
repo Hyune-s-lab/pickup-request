@@ -1,9 +1,12 @@
 package com.hyunec.pickuprequest.domain.pickup.entity
 
+import java.time.Instant
+
 data class Actor(
     val id: String,
     val type: Type,
-    val name: String
+    val name: String,
+    val createdAt: Instant = Instant.now()
 ) {
     enum class Type(
         val desc: String
