@@ -51,7 +51,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{host}}/pickups/01J35VDBNMZF4BCWNH7ZBZ5ENW/accept
+PATCH {{host}}/pickups/01J35YZSM4H6CZRPT647EWAXHV/accept
 Content-Type: application/json
 
 {
@@ -59,7 +59,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{host}}/pickups/01J35VDBNMZF4BCWNH7ZBZ5ENW/process
+PATCH {{host}}/pickups/01J35YZSM4H6CZRPT647EWAXHV/process
 Content-Type: application/json
 
 {
@@ -67,9 +67,12 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{host}}/pickups/01J35VDBNMZF4BCWNH7ZBZ5ENW/approve
+PATCH {{host}}/pickups/01J35YZSM4H6CZRPT647EWAXHV/approve
 Content-Type: application/json
 
 {
   "actorId": "01J35TVJKT2NT3WJFSTQ3C7AX6"
 }
+
+### pickup 조회
+GET {{host}}/pickups?pickupId=01J35YZSM4H6CZRPT647EWAXHV
