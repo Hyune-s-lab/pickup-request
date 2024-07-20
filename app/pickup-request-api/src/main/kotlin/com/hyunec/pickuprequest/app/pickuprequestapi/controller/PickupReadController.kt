@@ -23,13 +23,14 @@ class PickupReadController(
     @GetMapping("/pickups")
     fun readAll(
         @RequestParam(required = false) storeId: String?,
+        @RequestParam(required = false) requestActorId: String?,
 
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
         @RequestParam startedAt: Instant?,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
         @RequestParam endedAt: Instant?
     ): ReadAll.Response {
-        val pickups = pickupQueryService.findAllBy(storeId, startedAt, endedAt).map { PickupModel(it) }
+        val pickups = pickupQueryService.findAllBy(storeId, requestActorId, startedAt, endedAt).map { PickupModel(it) }
         return ReadAll.Response(
             pickups = pickups,
             totalCount = pickups.size,

@@ -40,7 +40,12 @@ class PickupJpaPersistenceAdapter(
     }
 
     @Transactional(readOnly = true)
-    override fun findAllBy(storeId: String?, startAt: Instant?, endAt: Instant?): List<Pickup> {
-        return pickupHistoryQuerydslRepository.findAllBy(storeId, startAt, endAt).map { it.toDomainEntity() }
+    override fun findAllBy(
+        storeId: String?,
+        requestActorId: String?,
+        startAt: Instant?,
+        endAt: Instant?
+    ): List<Pickup> {
+        return pickupHistoryQuerydslRepository.findAllBy(storeId, requestActorId, startAt, endAt).map { it.toDomainEntity() }
     }
 }

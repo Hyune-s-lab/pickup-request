@@ -10,5 +10,5 @@ interface PickupPersistencePort {
 
     fun findByDomainId(domainId: String): Pickup?
 
-    fun findAllBy(storeId: String?, startAt: Instant?, endAt: Instant?): List<Pickup>
+    fun findAllBy(storeId: String?, requestActorId: String?, startAt: Instant?, endAt: Instant?): List<Pickup>
 }

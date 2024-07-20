@@ -19,9 +19,13 @@ class PickupQueryService(
             ?: throw EntityNotFoundException("pickupId=$domainId")
     }
 
-    override fun findAllBy(storeId: String?, startAt: Instant?, endAt: Instant?): List<Pickup> {
-        log.info("findAllBy(storeId: $storeId, startedAt: $startAt, endedAt: $endAt)")
-        return pickupPersistenceAdapter.findAllBy(storeId, startAt, endAt)
+    override fun findAllBy(
+        storeId: String?,
+        requestActorId: String?,
+        startAt: Instant?,
+        endAt: Instant?
+    ): List<Pickup> {
+        return pickupPersistenceAdapter.findAllBy(storeId, requestActorId, startAt, endAt)
     }
 
     companion object : KLogging()
