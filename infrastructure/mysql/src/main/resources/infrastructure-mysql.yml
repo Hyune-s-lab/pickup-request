@@ -28,7 +28,7 @@ spring:
             stacktraceclass: com.hyunec
 
 logging:
-#    level.org.springframework.transaction.interceptor: TRACE
+    #    level.org.springframework.transaction.interceptor: TRACE
     level.org.springframework.orm.jpa: DEBUG
 
 ---
@@ -38,6 +38,10 @@ spring:
     jpa:
         hibernate:
             ddl-auto: create
+        defer-datasource-initialization: true
+    sql:
+        init:
+            mode: always
 
 ---
 spring.config.activate.on-profile: dev

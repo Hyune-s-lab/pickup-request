@@ -25,6 +25,9 @@ Content-Type: application/json
   "name": "SYSTEM_AUTO"
 }
 
+### actor 전체 조회
+GET http://localhost:8080/actors
+
 ###
 POST http://localhost:8080/stores
 Content-Type: application/json
@@ -34,36 +37,54 @@ Content-Type: application/json
   "address": "123 Main"
 }
 
+### store 전체 조회
+GET http://localhost:8080/stores
+
 ###
 POST {{host}}/pickups
 Content-Type: application/json
 
 {
-  "actorId": "01J30RNMGJKWBFQT95892JRZJB",
-  "storeId": "01J30RPR8KFB1S8ZTNAEM0KVN3",
+  "actorId": "01J35TVJKT2NT3WJFSTQ3C7AX6",
+  "storeId": "01J35TXCVCZ27VZHWZQ7VSD452",
   "desc": "Please pick up the items."
 }
 
 ###
-PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/accept
+PATCH {{host}}/pickups/01J36Q2PB8DMT937S0ZJ7MD8Z5/accept
 Content-Type: application/json
 
 {
-  "actorId": "01J30RSWWJXF32X986K6T1YTNW"
+  "actorId": "01J35TW0D7V812DS2Y8QRCXJA9"
 }
 
 ###
-PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/process
+PATCH {{host}}/pickups/01J36Q2PB8DMT937S0ZJ7MD8Z5/process
 Content-Type: application/json
 
 {
-  "actorId": "01J30RSWWJXF32X986K6T1YTNW"
+  "actorId": "01J35TW0D7V812DS2Y8QRCXJA9"
 }
 
 ###
-PATCH {{host}}/pickups/01J30RTPBJ8528QSC6VHEEN2TW/approve
+PATCH {{host}}/pickups/01J368E2AT3BGSHJC4QA0C8J5X/approve
 Content-Type: application/json
 
 {
-  "actorId": "01J30RNMGJKWBFQT95892JRZJB"
+  "actorId": "01J35TVJKT2NT3WJFSTQ3C7AX6"
 }
+
+### pickup 조회
+GET {{host}}/pickups?pickupId=01J368E2AT3BGSHJC4QA0C8J5X
+
+### pickup 조건 조회 - storeId
+GET http://localhost:8080/pickups?
+    storeId=01J35TXCVCZ27VZHWZQ7VSD452
+    &startedAt=2024-07-19T19:45:19.218114Z
+    &endedAt=2024-07-19T19:50:20.218114Z
+
+### pickup 조건 조회 - requestActorId
+GET http://localhost:8080/pickups?
+    requestActorId=01J35TVJKT2NT3WJFSTQ3C7AX6
+    &startedAt=2024-07-19T19:45:19.218114Z
+    &endedAt=2024-07-22T19:50:20.218114Z

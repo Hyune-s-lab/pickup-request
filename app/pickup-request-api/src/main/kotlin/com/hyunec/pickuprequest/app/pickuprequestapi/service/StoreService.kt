@@ -15,6 +15,10 @@ class StoreService(
         return storePersistencePort.save(Store(ULIDGenerator.take(), name, address))
     }
 
+    override fun findAll(): List<Store> {
+        return storePersistencePort.findAll()
+    }
+
     override fun findByStoreId(storeId: String): Store {
         return storePersistencePort.findByDomainId(storeId)
             ?: throw EntityNotFoundException("storeId=$storeId")

@@ -24,7 +24,6 @@ data class Pickup(
                 actor = command.actor,
                 status = Status.REQUESTED,
                 desc = command.desc,
-                at = Instant.now()
             )
         )
     )
@@ -37,7 +36,6 @@ data class Pickup(
                 actor = command.actor,
                 status = Status.ACCEPTED,
                 desc = command.desc,
-                at = Instant.now()
             )
         )
 
@@ -53,7 +51,6 @@ data class Pickup(
                 actor = command.actor,
                 status = Status.PROCESSED,
                 desc = command.desc,
-                at = Instant.now()
             )
         )
 
@@ -68,7 +65,6 @@ data class Pickup(
                 actor = command.actor,
                 status = Status.APPROVED,
                 desc = command.desc,
-                at = Instant.now()
             )
         )
 
@@ -83,7 +79,6 @@ data class Pickup(
                 actor = command.actor,
                 status = Status.COMPLETED,
                 desc = command.desc,
-                at = Instant.now()
             )
         )
 
@@ -121,7 +116,7 @@ data class Pickup(
         val actor: Actor,
         val status: Status,
         val desc: String?,
-        val at: Instant
+        val createdAt: Instant = Instant.now()
     )
 
     data class Label(
@@ -129,6 +124,7 @@ data class Pickup(
         val qrcode: String,
         val volume: Int,
         val images: List<Image>,
+        val createdAt: Instant = Instant.now()
     ) {
         data class Image(
             val url: String

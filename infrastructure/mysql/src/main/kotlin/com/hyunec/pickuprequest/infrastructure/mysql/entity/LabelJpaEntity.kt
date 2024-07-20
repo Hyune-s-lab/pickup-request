@@ -2,6 +2,7 @@ package com.hyunec.pickuprequest.infrastructure.mysql.entity
 
 import com.hyunec.pickuprequest.domain.pickup.entity.Pickup
 import jakarta.persistence.*
+import java.time.Instant
 
 @Table(name = "label")
 @Entity
@@ -10,6 +11,7 @@ class LabelJpaEntity(
     val domainId: String,
     val qrcode: String,
     val volume: Int,
+    val createdAt: Instant = Instant.now(),
 
     @ElementCollection
     @CollectionTable(name = "label_image", joinColumns = [JoinColumn(name = "label_id")])
@@ -19,6 +21,7 @@ class LabelJpaEntity(
         id = domainId,
         qrcode = qrcode,
         volume = volume,
+        createdAt = createdAt,
         images = images.map(LabelImageJpaEmbeddable::toDomainEntity)
     )
 }

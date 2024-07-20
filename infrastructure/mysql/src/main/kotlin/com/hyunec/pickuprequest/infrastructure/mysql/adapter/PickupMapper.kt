@@ -33,7 +33,7 @@ class PickupMapper(
             actor = toJpaEntity(history.actor),
             status = history.status,
             description = history.desc,
-            at = history.at
+            at = history.createdAt
         )
     }
 

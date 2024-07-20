@@ -16,6 +16,7 @@ class ActorJpaPersistenceAdapter(
             domainId = actor.id,
             type = actor.type,
             name = actor.name
+
         )
         return actorJpaRepository.save(actorJpaEntity).domainId
     }
